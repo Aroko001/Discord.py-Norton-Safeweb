@@ -16,8 +16,7 @@ class urlcheck(commands.Cog):
     async def url(self, i: discord.Interaction, url: str):
         base = f"https://safeweb.norton.com/report/show?url={url}&ulang=jpn"
         async with aiohttp.ClientSession() as session:
-            headers = {"User-Agent": "20Plus/1.0(DiscordBot)"}
-            async with session.get(base, headers=headers) as r:
+            async with session.get(base) as r:
                 if r.status == 200:
                     data = await r.content.read()
                     if "安全".encode() in data:
